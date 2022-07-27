@@ -1,25 +1,30 @@
 import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import styles from './NavBar.module.css'
 
 const NavBar = ({ user, handleLogout }) => {
   return (
     <>
+    <header className="App-header">
       {user ?
         <nav>
-          <ul>
-            <li>Welcome, {user.name}</li>
-            <li><Link to="/profiles">Profiles</Link></li>
-            <li><Link to="" onClick={handleLogout}>LOG OUT</Link></li>
-            <li><Link to="/changePassword">Change Password</Link></li>
-          </ul>
+          <NavLink to="/">My Diary Home</NavLink>
+          <NavLink to="/reference">Things to Reference</NavLink>
+            <NavLink to="/addReference">Add Reference</NavLink>
+            <NavLink to="/code">Things to Code</NavLink>
+            <NavLink to="/addCode">Add Code</NavLink>
+            <div className={styles.dropdown}>
+              <p className={styles.dropbtn}>Account</p>
+              <div className={styles.dropdownContent}>
+                <Link to="" onClick={handleLogout}>LOG OUT</Link>
+                <NavLink to="/changePassword">Change Password</NavLink>
+              </div>
+            </div>
         </nav>
       :
-        <nav>
-          <ul>
-            <li><Link to="/login">Log In</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
-          </ul>
-        </nav>
+        <></> 
       }
+      </header>
     </>
   )
 }
